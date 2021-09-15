@@ -1,4 +1,4 @@
-package com.example.cryptomvvm
+package com.example.coinapp
 
 import org.junit.Test
 

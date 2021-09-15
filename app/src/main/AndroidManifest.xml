@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.cryptomvvm">
+    package="com.example.coinapp">
 
     <application
         android:allowBackup="true"
-        android:name=".HiltApp"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CryptoMvvm">
+        android:theme="@style/Theme.CoinApp">
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.CryptoMvvm.NoActionBar">
+            android:theme="@style/Theme.CoinApp.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

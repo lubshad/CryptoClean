@@ -1,4 +1,4 @@
-package com.example.cryptomvvm.ui.theme
+package com.example.coinapp.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
