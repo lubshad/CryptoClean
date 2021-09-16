@@ -22,9 +22,9 @@ fun CoinListItem(coin: Coin) {
 
     ) {
         Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth()) {
-            Text(text = coin.id)
-            Text(text = "Bitcoin")
-            Text("Active")
+
+            Text(text = coin.name)
+            Text(coin.symbol)
         }
     }
 }

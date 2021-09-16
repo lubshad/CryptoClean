@@ -2,6 +2,8 @@ package com.example.coinapp.di
 
 import com.example.coinapp.common.Constants
 import com.example.coinapp.data.data_source.remote.CoinPaprikaApi
+import com.example.coinapp.data.repository.CoinRepositoryImpl
+import com.example.coinapp.domain.repository.CoinRepository
 import com.example.coinapp.domain.usecase.GetCoinsUseCase
 import dagger.Module
 import dagger.Provides
@@ -25,10 +27,16 @@ object AppModule {
             .create(CoinPaprikaApi::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideCoinRepository(api: CoinPaprikaApi) :CoinRepository {
+        return CoinRepositoryImpl(api)
+    }
+
 
     @Provides
     @Singleton
-    fun provideGetCoinsUseCase(): GetCoinsUseCase {
-        return GetCoinsUseCase()
+    fun provideGetCoinsUseCase(repository: CoinRepository): GetCoinsUseCase {
+        return GetCoinsUseCase(repository)
     }
 }

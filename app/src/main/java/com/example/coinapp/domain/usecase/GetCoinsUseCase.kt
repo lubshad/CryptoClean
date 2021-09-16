@@ -1,30 +1,38 @@
 package com.example.coinapp.domain.usecase
 
 import android.util.Log
+import com.example.coinapp.common.AppErrorType
 import com.example.coinapp.common.Resource
 import com.example.coinapp.data.model.Coin
-import kotlinx.coroutines.delay
+import com.example.coinapp.domain.repository.CoinRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
+import java.io.IOException
+import javax.inject.Inject
 
-class GetCoinsUseCase {
+class GetCoinsUseCase @Inject constructor(
+    private val coinRepository: CoinRepository
+) {
+
     companion object {
-        const val TAG = "CoinUseCase"
+        const val TAG = "GetCoinUseCase"
     }
 
     operator fun invoke(): Flow<Resource<List<Coin>>> = flow {
-        emit(Resource.Loading())
-        val coins = getData()
-        emit(Resource.Success<List<Coin>>(data = coins))
-    }
+        emit(Resource.Loading<List<Coin>>())
+        try {
+            val coins =coinRepository.getAllCoins().map { it }
 
-    private suspend fun getData(): List<Coin> {
-        Log.i(TAG, "GET data start")
-        delay(5000L)
-        val coinList: MutableList<Coin> = mutableListOf()
-        for (i in 1..20) {
-            coinList.add(Coin(id = i.toString()))
+            emit(Resource.Success<List<Coin>>(data = coins))
         }
-        return coinList
+        catch (e: HttpException) {
+            Log.i(TAG, e.localizedMessage)
+            emit(Resource.Error<List<Coin>>(errorType = AppErrorType.ServerError))
+        }
+        catch (e:IOException) {
+            Log.i(TAG, e.localizedMessage)
+            emit(Resource.Error<List<Coin>>(errorType = AppErrorType.NetworkError))
+        }
     }
 }

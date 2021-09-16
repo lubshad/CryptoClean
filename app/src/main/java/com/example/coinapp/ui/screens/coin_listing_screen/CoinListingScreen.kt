@@ -30,24 +30,33 @@ fun CoinListingScreen(
             Text(text = "Coin App")
         })
     }) {
-
-
-        if (state.loading) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
+        when {
+            state.loading -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
             }
-        } else {
-            LazyColumn {
-                item {
-                    Spacer(modifier = Modifier.height(10.dp))
-                }
-                items(state.coins!!) {
-                    coin -> CoinListItem(coin = coin)
+            state.error != null -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = state.error.errorMessage())
                 }
 
+            }
+            else -> {
+                LazyColumn {
+                    item {
+                        Spacer(modifier = Modifier.height(10.dp))
+                    }
+                    items(state.coins!!) { coin -> CoinListItem(coin = coin)
+                    }
+
+                }
             }
         }
     }
