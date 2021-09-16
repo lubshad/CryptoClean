@@ -37,8 +37,7 @@ class CoinListingViewModel @Inject constructor(
 
                 }
                 is Resource.Loading -> {
-                    coinListState.value = CoinListState(
-                    )
+                    coinListState.value = CoinListState()
                     Log.i(TAG, "loading")
 
                 }
