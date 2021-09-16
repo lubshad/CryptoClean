@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -21,13 +22,17 @@ fun CoinListingScreen(
     coinListingViewModel: CoinListingViewModel = viewModel()
 ) {
 
-    val loading = coinListingViewModel.loading.value
+    val state = coinListingViewModel.coinListState.value
+
+
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(text = "Coin App")
         })
     }) {
-        if (loading) {
+
+
+        if (state.loading) {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
@@ -35,16 +40,14 @@ fun CoinListingScreen(
                 CircularProgressIndicator()
             }
         } else {
-
             LazyColumn {
                 item {
                     Spacer(modifier = Modifier.height(10.dp))
                 }
-                for (i in 1..20) {
-                    item {
-                        CoinListItem()
-                    }
+                items(state.coins!!) {
+                    coin -> CoinListItem(coin = coin)
                 }
+
             }
         }
     }
