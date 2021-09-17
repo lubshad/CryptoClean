@@ -14,12 +14,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import com.example.coinapp.ui.screens.Screens
 import com.example.coinapp.ui.screens.coin_listing_screen.components.CoinListItem
 
 @Composable
 fun CoinListingScreen(
-    coinListingViewModel: CoinListingViewModel = viewModel()
+    coinListingViewModel: CoinListingViewModel = hiltViewModel(),
+    navController: NavHostController
 ) {
 
     val state = coinListingViewModel.coinListState.value
@@ -53,7 +56,10 @@ fun CoinListingScreen(
                     item {
                         Spacer(modifier = Modifier.height(10.dp))
                     }
-                    items(state.coins!!) { coin -> CoinListItem(coin = coin)
+                    items(state.coins!!) { coin ->
+                        CoinListItem(coin = coin, onClick = {
+                            navController.navigate(route = Screens.CoinDetailsScreen.route)
+                        })
                     }
 
                 }

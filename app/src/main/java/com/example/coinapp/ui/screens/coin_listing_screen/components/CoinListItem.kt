@@ -1,6 +1,7 @@
 package com.example.coinapp.ui.screens.coin_listing_screen.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -12,19 +13,27 @@ import com.example.coinapp.data.model.Coin
 
 
 @Composable
-fun CoinListItem(coin: Coin) {
+fun CoinListItem(coin: Coin, onClick: () -> Unit) {
     Box(modifier = Modifier
         .fillMaxWidth()
-        .padding(bottom = 10.dp , start = 10.dp, end = 10.dp)
+        .padding(bottom = 10.dp, start = 10.dp, end = 10.dp)
         .shadow(elevation = 10.dp)
         .background(Color.White)
+        .clickable {
+            onClick()
+        }
         .padding(10.dp)
 
-    ) {
-        Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth()) {
 
-            Text(text = coin.name)
-            Text(coin.symbol)
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()
+
+        ) {
+            Text("${coin.rank}. ${coin.name}(${coin.symbol})")
+
+            Text(coin.type)
         }
     }
 }
