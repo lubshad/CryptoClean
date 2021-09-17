@@ -27,8 +27,6 @@ fun CoinListItem(coin: Coin, onClick: () -> Unit) {
             onClick()
         }
         .padding(10.dp)
-
-
     ) {
         FlowRow(
             modifier = Modifier.fillMaxWidth(),
