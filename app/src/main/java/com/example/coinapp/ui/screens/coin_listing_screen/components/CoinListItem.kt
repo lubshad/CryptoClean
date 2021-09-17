@@ -5,11 +5,15 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.coinapp.data.model.Coin
+import com.google.accompanist.flowlayout.FlowMainAxisAlignment
+import com.google.accompanist.flowlayout.FlowRow
 
 
 @Composable
@@ -26,13 +30,12 @@ fun CoinListItem(coin: Coin, onClick: () -> Unit) {
 
 
     ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()
-
+        FlowRow(
+            modifier = Modifier.fillMaxWidth(),
+            mainAxisAlignment = FlowMainAxisAlignment.SpaceBetween
         ) {
-            Text("${coin.rank}. ${coin.name}(${coin.symbol})")
-            Text(coin.type)
+            Text(softWrap = true, text = "${coin.rank}. ${coin.name}(${coin.symbol})", overflow = TextOverflow.Ellipsis)
+            Text(coin.type, maxLines = 1 , softWrap = false)
         }
     }
 }
