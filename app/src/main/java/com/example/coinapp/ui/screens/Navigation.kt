@@ -22,7 +22,7 @@ fun Navigation() {
             route = Screens.CoinDetailsScreen.route + "?coinId={coinId}",
             arguments = listOf(navArgument("coinId") {})
         ) {
-            CoinDetailsScreen(coinId = it.arguments?.getString("coinId")!!)
+            CoinDetailsScreen()
         }
     }
 }

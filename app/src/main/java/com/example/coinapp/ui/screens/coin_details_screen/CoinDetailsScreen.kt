@@ -13,7 +13,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun CoinDetailsScreen(
-    coinId: String,
     coinDetailsViewModel: CoinDetailsViewModel = hiltViewModel(),
 ) {
 
