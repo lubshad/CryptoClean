@@ -32,7 +32,6 @@ fun CoinListItem(coin: Coin, onClick: () -> Unit) {
 
         ) {
             Text("${coin.rank}. ${coin.name}(${coin.symbol})")
-
             Text(coin.type)
         }
     }
