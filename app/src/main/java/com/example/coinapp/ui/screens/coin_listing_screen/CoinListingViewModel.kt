@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CoinListingViewModel @Inject constructor(
-    private val getCoinsUseCase: GetCoinsUseCase
+    private val getCoinsUseCase: GetCoinsUseCase,
 ) : ViewModel() {
 
     companion object {

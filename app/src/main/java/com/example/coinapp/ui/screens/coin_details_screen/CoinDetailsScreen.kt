@@ -1,22 +1,21 @@
 package com.example.coinapp.ui.screens.coin_details_screen
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Button
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.coinapp.ui.screens.Screens
-import com.example.coinapp.ui.screens.coin_listing_screen.components.CoinListItem
 
 @Composable
-fun CoinDetailsScreen(coinId: String , coinDetailsViewModel: CoinDetailsViewModel = hiltViewModel()) {
+fun CoinDetailsScreen(
+    coinId: String,
+    coinDetailsViewModel: CoinDetailsViewModel = hiltViewModel(),
+) {
 
 
     val state = coinDetailsViewModel.coinListState.value

@@ -19,7 +19,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCoinPaprikaApi() : CoinPaprikaApi {
+    fun provideCoinPaprikaApi(): CoinPaprikaApi {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -29,7 +29,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCoinRepository(api: CoinPaprikaApi) :CoinRepository {
+    fun provideCoinRepository(api: CoinPaprikaApi): CoinRepository {
         return CoinRepositoryImpl(api)
     }
 

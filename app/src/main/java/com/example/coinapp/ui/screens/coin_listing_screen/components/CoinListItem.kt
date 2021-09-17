@@ -2,10 +2,11 @@ package com.example.coinapp.ui.screens.coin_listing_screen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -32,8 +33,10 @@ fun CoinListItem(coin: Coin, onClick: () -> Unit) {
             modifier = Modifier.fillMaxWidth(),
             mainAxisAlignment = FlowMainAxisAlignment.SpaceBetween
         ) {
-            Text(softWrap = true, text = "${coin.rank}. ${coin.name}(${coin.symbol})", overflow = TextOverflow.Ellipsis)
-            Text(coin.type, maxLines = 1 , softWrap = false)
+            Text(softWrap = true,
+                text = "${coin.rank}. ${coin.name}(${coin.symbol})",
+                overflow = TextOverflow.Ellipsis)
+            Text(coin.type, maxLines = 1, softWrap = false)
         }
     }
 }

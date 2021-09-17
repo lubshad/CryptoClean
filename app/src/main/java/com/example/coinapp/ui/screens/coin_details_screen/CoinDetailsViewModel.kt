@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CoinDetailsViewModel @Inject constructor(
     private val getCoinDetailsUseCase: GetCoinDetailsUseCase,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     companion object {
@@ -33,7 +33,7 @@ class CoinDetailsViewModel @Inject constructor(
         }
     }
 
-    private fun getDetails(coinId:String) {
+    private fun getDetails(coinId: String) {
         getCoinDetailsUseCase(coinId).onEach { result ->
             when (result) {
                 is Resource.Error -> {

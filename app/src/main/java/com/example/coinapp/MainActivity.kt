@@ -14,7 +14,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             CoinAppTheme {
                 Navigation()
-//                CoinListingScreen(navController = navController)
             }
         }
     }
