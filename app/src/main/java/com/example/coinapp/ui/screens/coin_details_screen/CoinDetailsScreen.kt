@@ -1,18 +1,19 @@
 package com.example.coinapp.ui.screens.coin_details_screen
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.coinapp.ui.screens.coin_details_screen.components.DefaultSpacer
+import com.example.coinapp.ui.screens.coin_details_screen.components.HeaderText
+import com.example.coinapp.ui.screens.coin_details_screen.components.Tag
+import com.example.coinapp.ui.screens.coin_details_screen.components.Team
 import com.google.accompanist.flowlayout.FlowRow
 
 @Composable
@@ -27,8 +28,8 @@ fun CoinDetailsScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(20.dp),
-            contentAlignment = Alignment.TopStart
+                .padding(horizontal = 20.dp),
+            contentAlignment = Alignment.Center
         ) {
             when {
                 state.loading -> {
@@ -36,37 +37,37 @@ fun CoinDetailsScreen(
                 }
                 state.error != null -> {
                     Text(text = state.error.errorMessage())
-
                 }
                 else -> {
                     val details = state.details!!
-                    LazyColumn {
+                    LazyColumn(modifier = Modifier.fillMaxHeight()) {
                         item {
+                            DefaultSpacer()
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween) {
-                                Text("${details.rank}. ${details.name}(${details.symbol})")
+                                HeaderText(text = "${details.rank}. ${details.name}(${details.symbol})")
                                 Text(if (details.is_active) "active" else "inactive")
                             }
+                            DefaultSpacer()
                             Text(text = details.description)
-                            Text(text = "Tags")
-                            FlowRow() {
+                            DefaultSpacer()
+
+                            HeaderText(text = "Tags")
+                            DefaultSpacer()
+
+                            FlowRow {
                                 details.tags.forEach {
-                                    Text(text = it.name)
+                                    Tag(text = it.name)
                                 }
 
                             }
-                            Text("Team Members")
+                            DefaultSpacer()
+                            HeaderText("Team Members")
+                            DefaultSpacer()
                             Column {
                                 details.team.forEach {
-                                    Card(
-                                        border = BorderStroke(width = 1.dp, color = Color.Gray)
-                                    ) {
-                                        Column() {
-                                            Text(text = it.name)
-                                            Text(text = it.position)
-                                        }
-                                    }
+                                    Team(it)
                                 }
                             }
                         }

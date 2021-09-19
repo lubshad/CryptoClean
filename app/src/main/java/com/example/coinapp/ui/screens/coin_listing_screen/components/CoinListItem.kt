@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -33,10 +34,13 @@ fun CoinListItem(coin: Coin, onClick: () -> Unit) {
             modifier = Modifier.fillMaxWidth(),
             mainAxisAlignment = FlowMainAxisAlignment.SpaceBetween
         ) {
-            Text(softWrap = true,
+            Text(
+                modifier = Modifier.fillMaxWidth(.8f)
+                        ,
                 text = "${coin.rank}. ${coin.name}(${coin.symbol})",
-                overflow = TextOverflow.Ellipsis)
-            Text(coin.type, maxLines = 1, softWrap = false)
+                overflow = TextOverflow.Ellipsis,
+            maxLines = 2)
+            Text(coin.type)
         }
     }
 }
