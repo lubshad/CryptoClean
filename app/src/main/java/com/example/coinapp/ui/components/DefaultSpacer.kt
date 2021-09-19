@@ -1,4 +1,4 @@
-package com.example.coinapp.ui.screens.coin_details_screen.components
+package com.example.coinapp.ui.components
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height

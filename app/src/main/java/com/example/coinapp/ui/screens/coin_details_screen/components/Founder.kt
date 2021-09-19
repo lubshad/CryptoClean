@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.coinapp.data.model.Team
+import com.example.coinapp.ui.components.HeaderText
 
 @Composable
 fun Team(team: Team) {

@@ -10,8 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.coinapp.ui.screens.coin_details_screen.components.DefaultSpacer
-import com.example.coinapp.ui.screens.coin_details_screen.components.HeaderText
+import com.example.coinapp.ui.components.DefaultSpacer
+import com.example.coinapp.ui.components.HeaderText
 import com.example.coinapp.ui.screens.coin_details_screen.components.Tag
 import com.example.coinapp.ui.screens.coin_details_screen.components.Team
 import com.google.accompanist.flowlayout.FlowRow

@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,7 +21,7 @@ import com.google.accompanist.flowlayout.FlowRow
 fun CoinListItem(coin: Coin, onClick: () -> Unit) {
     Box(modifier = Modifier
         .fillMaxWidth()
-        .padding(bottom = 10.dp, start = 10.dp, end = 10.dp)
+        .padding(top = 10.dp)
         .shadow(elevation = 10.dp)
         .background(Color.White)
         .clickable {

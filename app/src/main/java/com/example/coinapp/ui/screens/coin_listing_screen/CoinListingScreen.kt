@@ -1,15 +1,12 @@
 package com.example.coinapp.ui.screens.coin_listing_screen
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +19,7 @@ import com.example.coinapp.ui.screens.coin_listing_screen.components.CoinListIte
 @Composable
 fun CoinListingScreen(
     coinListingViewModel: CoinListingViewModel = hiltViewModel(),
-    navController: NavHostController
+    navController: NavHostController,
 ) {
 
     val state = coinListingViewModel.coinListState.value
@@ -33,37 +30,45 @@ fun CoinListingScreen(
             Text(text = "Coin App")
         })
     }) {
-        when {
-            state.loading -> {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            when {
+                state.loading -> {
                     CircularProgressIndicator()
                 }
-            }
-            state.error != null -> {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
+                state.error != null -> {
                     Text(text = state.error.errorMessage())
+
                 }
+                else -> {
+                    LazyColumn(
+                        modifier = Modifier.padding(horizontal = 10.dp)
+                    ) {
 
-            }
-            else -> {
-                LazyColumn {
-                    item {
-                        Spacer(modifier = Modifier.height(10.dp))
-                    }
-                    items(state.coins!!) { coin ->
-                        CoinListItem(coin = coin, onClick = {
-                            navController.navigate(route = Screens.CoinDetailsScreen.route + "?coinId=${coin.id}")
-                        })
-                    }
+                        item {
+                            SearchField()
+                        }
+                        items(state.coins!!) { coin ->
+                            CoinListItem(coin = coin, onClick = {
+                                navController.navigate(route = Screens.CoinDetailsScreen.route + "?coinId=${coin.id}")
+                            })
+                        }
 
+                    }
                 }
             }
         }
+
+
     }
+}
+
+@Composable
+fun SearchField() {
+    OutlinedTextField(
+        modifier = Modifier.fillMaxWidth()
+            .padding(vertical = 10.dp),
+        value = "", onValueChange = {})
 }
