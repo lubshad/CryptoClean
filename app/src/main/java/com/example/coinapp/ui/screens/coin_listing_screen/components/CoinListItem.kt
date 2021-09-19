@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
+import com.example.coinapp.common.defaultPadding
 import com.example.coinapp.data.model.Coin
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
@@ -21,24 +21,23 @@ import com.google.accompanist.flowlayout.FlowRow
 fun CoinListItem(coin: Coin, onClick: () -> Unit) {
     Box(modifier = Modifier
         .fillMaxWidth()
-        .padding(top = 10.dp)
-        .shadow(elevation = 10.dp)
+        .padding(top = defaultPadding / 2)
+        .shadow(elevation = defaultPadding / 2)
         .background(Color.White)
         .clickable {
             onClick()
         }
-        .padding(10.dp)
+        .padding(defaultPadding / 2)
     ) {
         FlowRow(
             modifier = Modifier.fillMaxWidth(),
             mainAxisAlignment = FlowMainAxisAlignment.SpaceBetween
         ) {
             Text(
-                modifier = Modifier.fillMaxWidth(.8f)
-                        ,
+                modifier = Modifier.fillMaxWidth(.8f),
                 text = "${coin.rank}. ${coin.name}(${coin.symbol})",
                 overflow = TextOverflow.Ellipsis,
-            maxLines = 2)
+                maxLines = 2)
             Text(coin.type)
         }
     }

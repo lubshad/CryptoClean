@@ -9,14 +9,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.coinapp.common.defaultPadding
 
 @Composable
 fun Tag(text: String) {
     Box(
         modifier = Modifier
-            .padding(end = 10.dp, bottom = 10.dp)
-            .border(width = 3.dp, shape = RoundedCornerShape(20.dp), color = Color.Blue)
-            .padding(horizontal = 20.dp, vertical = 10.dp)
+            .padding(end = defaultPadding/2, bottom = defaultPadding/2)
+            .border(width = 3.dp, shape = RoundedCornerShape(defaultPadding), color = Color.Blue)
+            .padding(horizontal = defaultPadding, vertical = defaultPadding/2)
     ) {
         Text(text = text)
     }

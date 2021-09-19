@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.coinapp.common.defaultPadding
 import com.example.coinapp.data.model.Team
 import com.example.coinapp.ui.components.HeaderText
 
@@ -20,9 +21,9 @@ fun Team(team: Team) {
             .padding(vertical = 5.dp)
             .fillMaxWidth()
             .border(width = 1.dp,
-            shape = RoundedCornerShape(5.dp),
-            color = Color.Gray)
-            .padding(10.dp)
+                shape = RoundedCornerShape(5.dp),
+                color = Color.Gray)
+            .padding(defaultPadding / 2)
     ) {
         Column {
             HeaderText(text = team.name)

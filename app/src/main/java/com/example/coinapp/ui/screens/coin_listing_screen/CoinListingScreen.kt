@@ -1,20 +1,22 @@
 package com.example.coinapp.ui.screens.coin_listing_screen
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.coinapp.common.defaultPadding
 import com.example.coinapp.ui.screens.Screens
 import com.example.coinapp.ui.screens.coin_listing_screen.components.CoinListItem
+import com.example.coinapp.ui.screens.coin_listing_screen.components.SearchField
 
 @Composable
 fun CoinListingScreen(
@@ -23,6 +25,7 @@ fun CoinListingScreen(
 ) {
 
     val state = coinListingViewModel.coinListState.value
+    val listState = rememberLazyListState()
 
 
     Scaffold(topBar = {
@@ -43,20 +46,25 @@ fun CoinListingScreen(
 
                 }
                 else -> {
-                    LazyColumn(
-                        modifier = Modifier.padding(horizontal = 10.dp)
-                    ) {
+                    Column(modifier = Modifier.padding(horizontal = defaultPadding / 2)) {
 
-                        item {
-                            SearchField()
-                        }
-                        items(state.coins!!) { coin ->
-                            CoinListItem(coin = coin, onClick = {
-                                navController.navigate(route = Screens.CoinDetailsScreen.route + "?coinId=${coin.id}")
-                            })
-                        }
+                        SearchField(listState = listState)
+                        LazyColumn(
+                            state = listState,
+                            modifier = Modifier
+                                .fillMaxHeight()
 
+
+                        ) {
+                            items(state.coins!!) { coin ->
+                                CoinListItem(coin = coin, onClick = {
+                                    navController.navigate(route = Screens.CoinDetailsScreen.route + "?coinId=${coin.id}")
+                                })
+                            }
+
+                        }
                     }
+
                 }
             }
         }
@@ -65,10 +73,4 @@ fun CoinListingScreen(
     }
 }
 
-@Composable
-fun SearchField() {
-    OutlinedTextField(
-        modifier = Modifier.fillMaxWidth()
-            .padding(vertical = 10.dp),
-        value = "", onValueChange = {})
-}
+

@@ -5,8 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.coinapp.common.Constants
+
 import com.example.coinapp.common.Resource
+import com.example.coinapp.common.coinId
 import com.example.coinapp.domain.usecase.GetCoinDetailsUseCase
 import com.example.coinapp.ui.screens.coin_listing_screen.CoinDetailsState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,7 +30,7 @@ class CoinDetailsViewModel @Inject constructor(
 
     init {
         Log.i(TAG, "INIT")
-        savedStateHandle.get<String>(Constants.PARAM_COIN_ID)?.let { coinId ->
+        savedStateHandle.get<String>(coinId)?.let { coinId ->
             getDetails(coinId)
         }
     }

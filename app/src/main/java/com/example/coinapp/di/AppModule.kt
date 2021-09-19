@@ -1,6 +1,8 @@
 package com.example.coinapp.di
 
-import com.example.coinapp.common.Constants
+
+
+import com.example.coinapp.common.baseUrl
 import com.example.coinapp.data.data_source.remote.CoinPaprikaApi
 import com.example.coinapp.data.repository.CoinRepositoryImpl
 import com.example.coinapp.domain.repository.CoinRepository
@@ -21,7 +23,7 @@ object AppModule {
     @Singleton
     fun provideCoinPaprikaApi(): CoinPaprikaApi {
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(CoinPaprikaApi::class.java)
