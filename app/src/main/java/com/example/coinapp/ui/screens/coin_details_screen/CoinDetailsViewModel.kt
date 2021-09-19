@@ -28,6 +28,7 @@ class CoinDetailsViewModel @Inject constructor(
     val coinListState = mutableStateOf(CoinDetailsState())
 
     init {
+        Log.i(TAG, "INIT")
         savedStateHandle.get<String>(Constants.PARAM_COIN_ID)?.let { coinId ->
             getDetails(coinId)
         }

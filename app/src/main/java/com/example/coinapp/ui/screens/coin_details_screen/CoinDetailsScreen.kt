@@ -1,15 +1,19 @@
 package com.example.coinapp.ui.screens.coin_details_screen
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.flowlayout.FlowRow
 
 @Composable
 fun CoinDetailsScreen(
@@ -21,32 +25,50 @@ fun CoinDetailsScreen(
 
     Scaffold {
         Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp),
+            contentAlignment = Alignment.TopStart
         ) {
             when {
                 state.loading -> {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator()
-                    }
+                    CircularProgressIndicator()
                 }
                 state.error != null -> {
-                    Box(
-                        modifier = Modifier.fillMaxSize(),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(text = state.error.errorMessage())
-                    }
+                    Text(text = state.error.errorMessage())
 
                 }
                 else -> {
+                    val details = state.details!!
                     LazyColumn {
                         item {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween) {
+                                Text("${details.rank}. ${details.name}(${details.symbol})")
+                                Text(if (details.is_active) "active" else "inactive")
+                            }
+                            Text(text = details.description)
+                            Text(text = "Tags")
+                            FlowRow() {
+                                details.tags.forEach {
+                                    Text(text = it.name)
+                                }
 
-                            Text(text = state.details?.description.toString())
+                            }
+                            Text("Team Members")
+                            Column {
+                                details.team.forEach {
+                                    Card(
+                                        border = BorderStroke(width = 1.dp, color = Color.Gray)
+                                    ) {
+                                        Column() {
+                                            Text(text = it.name)
+                                            Text(text = it.position)
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
